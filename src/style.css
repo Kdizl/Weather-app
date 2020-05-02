@@ -1,13 +1,6 @@
 body {
   font-family: "Patrick Hand SC", cursive;
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-  
-}
-.container {
-  padding: 10px 60px 30px 60px;
-  text-align: center;
-  background-image: url("/images/cloudbackground.jpeg");
-  background-size: cover;
 }
 
 #wrap {
@@ -20,24 +13,24 @@ body {
 }
 
 #cent {
-  position:absolute;
-  top:30%;
-  left:30%;
-  margin-top:-30px; /* this is half the height of your div*/  
-  margin-left:-15px; /*this is half of width of your div*/
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  margin-top: -30px; /* this is half the height of your div*/
+  margin-left: -15px; /*this is half of width of your div*/
 }
 
 #fahrenheit-link {
-color:   #ffffff;
+  color: #ffffff;
 }
 
 #celsius-link {
-color:   #ffffff;
-text-emphasis: weight;
+  color: #ffffff;
+  text-emphasis: weight;
 }
 
 .cities {
-  color:  #ffffff;
+  color: #ffffff;
   font-size: 24px;
   padding: 20 20px;
   word-spacing: 70px;
@@ -65,19 +58,19 @@ li {
   list-style: none;
 }
 
+.weather-app-wrapper {
+  max-width: 600px;
+  margin: 30 auto;
+}
+
 .weather-app {
   border: 1px solid #dadde1;
-  margin: 100px auto;
-  border-radius: 25px;
-  max-width: 700px;
-  padding: 30px;
+  border-radius: 5px;
+  padding: 20px;
   display: block;
-  margin: 0 auto;
-  margin-top: 30px;
-  align-content: center;
-  background-color: #ffffff;
   box-sizing: border-box;
-  position: absolute;
+  background-image: url("/images/cloudbackground.jpeg");
+  background-size: cover;
 }
 
 .weather-icon {
@@ -98,6 +91,10 @@ li {
   font-size: 27px;
   margin: 20px auto 0px;
   position: relative;
+}
+
+.overview {
+  margin-bottom: 20px;
 }
 
 .units {

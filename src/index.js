@@ -53,7 +53,7 @@ function searchLocation(position) {
   let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${
     position.coords.latitude
-  }&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+    }&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayWeatherCondition);
 }
@@ -61,6 +61,42 @@ function searchLocation(position) {
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
+}
+
+function searchSeattle(Seattle) {
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=seattle&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeatherCondition);
+}
+
+function answerClick(event) {
+  event.preventDefault();
+  let Seattle = document.querySelector("#Seattle").value;
+  searchSeattle(Seattle);
+}
+
+function searchDublin(Dublin) {
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=dublin&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeatherCondition);
+}
+
+function returnClick(event) {
+  event.preventDefault();
+  let Dublin = document.querySelector("#Dublin").value;
+  searchDublin(Dublin);
+}
+
+function searchPorto(Porto) {
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=porto&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeatherCondition);
+}
+
+function handleClick(event) {
+  event.preventDefault();
+  let Porto = document.querySelector("#Porto").value;
+  searchPorto(Porto);
 }
 
 function convertToFahrenheit(event) {
