@@ -1,6 +1,5 @@
 body {
   font-family: "Patrick Hand SC", cursive;
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
 #wrap {
@@ -29,11 +28,23 @@ body {
   text-emphasis: weight;
 }
 
+#wind {
+  line-height: 30px;
+}
+
+#feels {
+  line-height: 50px;
+}
+
 .cities {
-  color: #ffffff;
   font-size: 24px;
-  padding: 20 20px;
+  padding: 20px;
   word-spacing: 70px;
+  text-align: center;
+}
+
+.btn-link {
+  color: #ffffff;
 }
 
 h1 {
@@ -59,18 +70,20 @@ li {
 }
 
 .weather-app-wrapper {
-  max-width: 600px;
-  margin: 30 auto;
+  max-width: 550px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 30px;
+  display: block;
+  align-content: center;
 }
 
 .weather-app {
-  border: 1px solid #dadde1;
+  border: 5px solid #dadde1;
   border-radius: 5px;
-  padding: 20px;
-  display: block;
-  box-sizing: border-box;
   background-image: url("/images/cloudbackground.jpeg");
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .weather-icon {
@@ -112,14 +125,76 @@ body {
 }
 
 .btn-secondary {
-  background-color: grey;
-  border: 1px solid grey;
+  color: #151515;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
   text-align: center;
   display: block;
   margin: 0 auto 0 auto;
 }
 
 .btn-secondary:hover {
-  background: white;
-  color: grey;
+  background: #207ec4;
+  border: 1px solid #207ec4;
+  color: #ffffff;
+}
+.weather-forecast {
+  margin-top: 10px;
+}
+
+.weather-forecast h3 {
+  color: rgb(186, 186, 186);
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  height: 15px;
+  line-height: 15px;
+  padding-top: 7px;
+}
+
+.weather-forecast img {
+  display: block;
+  margin: 0 auto;
+  height: 48px;
+  width: 48px;
+}
+
+.weather-forecast-temperature {
+  text-align: center;
+  color: rgb(135, 135, 135);
+  font-size: 13px;
+  font-weight: 400;
+  height: auto;
+  line-height: 15px;
+  white-space: nowrap;
+}
+.weather-forecast {
+  margin-top: 10px;
+}
+
+.weather-forecast h3 {
+  color: rgb(33, 33, 33);
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  height: 15px;
+  line-height: 15px;
+  padding-top: 7px;
+}
+
+.weather-forecast img {
+  display: block;
+  margin: 0 auto;
+  height: 48px;
+  width: 48px;
+}
+
+.weather-forecast-temperature {
+  text-align: center;
+  color: rgb(33, 33, 33);
+  font-size: 13px;
+  font-weight: 400;
+  height: auto;
+  line-height: 15px;
+  white-space: nowrap;
 }

@@ -1,14 +1,7 @@
-function formatDate(date) {
-  let hours = date.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
+//Time and Date
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
 
-  let dayIndex = date.getDay();
   let days = [
     "Sunday",
     "Monday",
@@ -18,107 +11,178 @@ function formatDate(date) {
     "Friday",
     "Saturday"
   ];
-  let day = days[dayIndex];
-
-  return `${day} ${hours}:${minutes}`;
+  let day = days[date.getDay()];
+  return `${day} ${formatHours(timestamp)}`;
 }
 
-function displayWeatherCondition(response) {
-  document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#temperature").innerHTML = Math.round(
-    response.data.main.temp
-  );
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
 
-  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-  document.querySelector("#wind").innerHTML = Math.round(
-    response.data.wind.speed
+  return `${hours}:${minutes}`;
+}
+//Weather and Forecast
+function getWeather(response) {
+  console.log(response.data.main.temp);
+  document.querySelector("h1").innerHTML = response.data.name;
+  celsius = response.data.main.temp;
+  let temperature = document.querySelector("#temperature");
+  let humidity = document.querySelector("#humidity");
+  let description = document.querySelector("#description");
+  let wind = document.querySelector("#wind");
+  let date = document.querySelector("#date");
+  let icon = document.querySelector("#icon");
+  let feels = document.querySelector("#feels");
+
+
+  celsius = response.data.main.temp;
+
+  temperature.innerHTML = Math.round(celsius);
+  humidity.innerHTML = response.data.main.humidity;
+  description.innerHTML = response.data.weather[0].description;
+  wind.innerHTML = Math.round(response.data.wind.speed);
+  date.innerHTML = formatDate(response.data.dt * 1000);
+  icon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].main;
+  icon.setAttribute("alt", response.data.weather[0].description);
+  feels.innerHTML = Math.round(response.data.main.feels_like);
 }
 
-function searchCity(city) {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+function getForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `
+    <div class="col-2">
+      <h3>
+        ${formatHours(forecast.dt * 1000)}
+      </h3>
+      <img
+        src="http://openweathermap.org/img/wn/${
+      forecast.weather[0].icon
+      }@2x.png"
+      />
+      <div class="weather-forecast-temperature">
+        <strong>
+          ${Math.round(forecast.main.temp_max)}°
+        </strong>
+        ${Math.round(forecast.main.temp_min)}°
+      </div>
+    </div>
+  `;
+  }
+}
+// City Buttons
+function searchSeattle() {
+  let apiKey = "cbc9d5dcf3f6291727d2c62223225326";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?id=5809844&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(getWeather);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?id=5809844&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(getForecast);
+}
+
+function searchDublin() {
+  let apiKey = "cbc9d5dcf3f6291727d2c62223225326";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?id=2964574&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(getWeather);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?id=2964574&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(getForecast);
+}
+
+function searchPorto() {
+  let apiKey = "cbc9d5dcf3f6291727d2c62223225326";
+  let apiUrl = `https://​​api.openweathermap.org/data/2.5/weather?id=6458924&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(getWeather);
+
+  apiUrl = `https://​​api.openweathermap.org/data/2.5/forecast?id=6458924&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(getForecast);
+}
+
+function showSeattle(event) {
+  event.preventDefault();
+  let seattle = document.querySelector("#seattle").value;
+  searchSeattle(seattle);
+}
+
+let seattle = document.querySelector("#seattle");
+seattle.addEventListener("click", showSeattle);
+
+function showDublin(event) {
+  event.preventDefault();
+  let dublin = document.querySelector("#dublin").value;
+  searchDublin(dublin);
+}
+
+let dublin = document.querySelector("#dublin");
+dublin.addEventListener("click", showDublin);
+
+function showPorto(event) {
+  event.preventDefault();
+  let porto = document.querySelector("#dublin").value;
+  searchPorto(porto);
+}
+let porto = document.querySelector("#porto");
+porto.addEventListener("click", showPorto);
+
+function search(city) {
+  let apiKey = "cbc9d5dcf3f6291727d2c62223225326";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWeatherCondition);
-}
+  axios.get(apiUrl).then(getWeather);
 
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(getForecast);
+}
+// Search Form and Cnversion
 function handleSubmit(event) {
   event.preventDefault();
-  let city = document.querySelector("#city-input").value;
-  searchCity(city);
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
 }
 
-function searchLocation(position) {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${
-    position.coords.latitude
-    }&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+let fahrenheitConvert = document.querySelector("#convert-to-fahrenheit");
+fahrenheitConvert.addEventListener("click", getFahrenheit);
 
-  axios.get(apiUrl).then(displayWeatherCondition);
-}
+let celsiusConvert = document.querySelector("#convert-to-celsius");
+celsiusConvert.addEventListener("click", getCelsius);
 
-function getCurrentLocation(event) {
-  event.preventDefault();
-  navigator.geolocation.getCurrentPosition(searchLocation);
-}
-
-function searchSeattle(Seattle) {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=seattle&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWeatherCondition);
-}
-
-function answerClick(event) {
-  event.preventDefault();
-  let Seattle = document.querySelector("#Seattle").value;
-  searchSeattle(Seattle);
-}
-
-function searchDublin(Dublin) {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=dublin&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWeatherCondition);
-}
-
-function returnClick(event) {
-  event.preventDefault();
-  let Dublin = document.querySelector("#Dublin").value;
-  searchDublin(Dublin);
-}
-
-function searchPorto(Porto) {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=porto&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWeatherCondition);
-}
-
-function handleClick(event) {
-  event.preventDefault();
-  let Porto = document.querySelector("#Porto").value;
-  searchPorto(Porto);
-}
-
-function convertToFahrenheit(event) {
+function getFahrenheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 66;
+
+  celsiusConvert.classList.remove("active");
+  fahrenheitConvert.classList.add("active");
+  let fahrenheit = (celsius * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheit);
 }
 
-function convertToCelsius(event) {
+function getCelsius(event) {
   event.preventDefault();
+  celsiusConvert.classList.add("active");
+  fahrenheitConvert.classList.remove("active");
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 19;
+  temperatureElement.innerHTML = Math.round(celsius);
 }
 
-let dateElement = document.querySelector("#date");
-let currentTime = new Date();
-dateElement.innerHTML = formatDate(currentTime);
+let celsius = null;
 
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", handleSubmit);
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
 
-let currentLocationButton = document.querySelector("#current-location-button");
-currentLocationButton.addEventListener("click", getCurrentLocation);
-
-searchCity("New York");
+search("Helsinki");

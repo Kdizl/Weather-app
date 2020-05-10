@@ -24,18 +24,13 @@
       <div class="weather-app-wrapper">
         <div class="container structure weather-app" div id="cent">
           <p class="cities">
-            <span class= "Seattle">  <input
-                  type="button"
-                  value="Seattle"
-                  id="Seattle"></span>
-                   <span class= "Dublin">  <input
-                  type="button"
-                  value="Dublin"
-                  id="Dublin"></span>
-                   <span class= "Porto">  <input
-                  type="button"
-                  value="Porto"
-                  id="Porto"></span>
+            <button type="button" class="btn btn-link" id="seattle">
+              Seattle
+            </button>
+            <button type="button" class="btn btn-link" id="dublin">
+              Dublin
+            </button>
+            <button type="button" class="btn btn-link" id="porto">Porto</button>
           </p>
           <form class="search-form" id="search-form">
             <div class="row">
@@ -50,109 +45,65 @@
                 />
               </div>
               <div class="col-3">
-                <input
+                <button
                   type="submit"
                   value="🗺 Search"
                   class="form-control btn btn-secondary shadow-sm w-100"
-                />
+                /> <img src="images/world.svg" width="27px"/>  Search</button>
               </div>
               <div class="col-3">
                 <button
                   class="btn btn-secondary btn-success w-100"
                   id="current-location-button"
                 >
-                  🖈 Current
+                <img src="images/pushpin (2).svg" width="23px"/> Current
                 </button>
               </div>
             </div>
           </form>
-          <div class = "overview">
-          <h1 id="city"></h1>
-          <ul>
-            <li id="date"></li>
-            <li id="description"></li>
-          </ul>
-          <div class="row">
-            <div class="col-6">
-              <div class="clearfix">
-                <div class="float-left">
-                  <span class="temperature" id="temperature"></span
-                  ><span class="units"
-                    ><a href="#" id="celsius-link">°C</a> |
-                    <a href="#" id="fahrenheit-link">°F</a></span
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="col-6">
-              <ul>
-                <li>Humidity: <span id="humidity"></span>%</li>
-                <li>Wind: <span id="wind"></span> km/h</li>
-              </ul>
-            </div>
-          </div>
-          <div class="weather">
-            <small>
-              <div class="row">
-                <div class="col-2">
-                  Monday
-                </div>
-                <div class="col-2">
-                  Tuesday
-                </div>
-                <div class="col-2">
-                  Wednesday
-                </div>
-                <div class="col-2">
-                  Thursday
-                </div>
-                <div class="col-2">
-                  Friday
-                </div>
-              </div>
-            </small>
+          <div class="overview">
+            <h1 id="city"></h1>
+            <ul>
+              <li id="date"></li>
+              <li id="description"></li>
+            </ul>
             <div class="row">
-              <div class="col-2">
-                <div class="col">
-                  <img src="images/cloud.svg" width="30px" />
+              <div class="col-6">
+                <div class="clearfix">
+                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="Clear" id="icon" class="float-left" />
+                  <div class="float-left">
+                    <span class="temperature" id="temperature"></span
+                    ><span class="units"
+                      ><a href="#" id="convert-to-celsius">°C</a> |
+                      <a href="#" id="convert-to-fahrenheit">°F</a></span
+                    >
+                  </div>
                 </div>
               </div>
-              <div class="col-2">
-                <div class="col">
-                  <img src="images/cloud.svg" width="30px" />
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="col">
-                  <img src="images/cloud.svg" width="30px" />
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="col">
-                  <img src="images/cloud.svg" width="30px" />
-                </div>
-              </div>
-              <div class="col-2">
-                <div class="col">
-                  <img src="images/cloud.svg" width="30px" />
-                </div>
+              <div class="col-6">
+                <ul>
+                  <li><img src="images/water.svg" width="23px"/>  Humidity: <span id="humidity"></span>%</li>
+                  <div>
+                  <div>
+                    <div>
+                  <li><img src="images/wind (1).svg" width="23px"/>  Wind: <span id="wind"></span> km/h</li>
+                  <div>
+                      <div>
+                        <div>
+                  <li><img src="images/thermometer (1).svg" width="23px"/>  Feels like: <span id="feels"> </span>
+                    °C</li>
+                </ul>
               </div>
             </div>
-            <div class="row">
-              <div class="col-2"><strong>24°</strong> 19°</div>
-              <div class="col-2"><strong>24°</strong> 21°</div>
-              <div class="col-2"><strong>28°</strong> 21°</div>
-              <div class="col-2"><strong>28°</strong> 21°</div>
-              <div class="col-2"><strong>29°</strong> 20°</div>
-            </div>
+            <div class="row weather-forecast" id="forecast"></div>
           </div>
+          <small>
+            <a href="https://github.com/Kdizl/Weather-app" target="_blank"
+              >Open-source code</a
+            >
+            by Katie Asquith
+          </small>
         </div>
-        <small>
-          <a href="https://github.com/Kdizl/Weather-app" target="_blank"
-            >Open-source code</a
-          >
-          by Katie Asquith
-        </small>
       </div>
     </div>
     <script src="src/index.js"></script>
