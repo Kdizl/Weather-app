@@ -124,7 +124,8 @@ body {
   height: 100%;
 }
 
-.btn-secondary {
+.btn-light {
+  align-content: center;
   color: #151515;
   background-color: #ffffff;
   border: 1px solid #ffffff;

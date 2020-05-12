@@ -141,6 +141,23 @@ function showPorto(event) {
 let porto = document.querySelector("#porto");
 porto.addEventListener("click", showPorto);
 
+let currentLocation = document.querySelector("#current-location-button");
+currentLocation.addEventListener("click", getLocation);
+
+function searchLocation(position) {
+  let apiKey = "cbc9d5dcf3f6291727d2c62223225326";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${
+    position.coords.latitude
+    }&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(getWeather);
+}
+
+function getLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
+// Search Form and Conversion
 function search(city) {
   let apiKey = "cbc9d5dcf3f6291727d2c62223225326";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -149,7 +166,7 @@ function search(city) {
   apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(getForecast);
 }
-// Search Form and Cnversion
+
 function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
