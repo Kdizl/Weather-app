@@ -126,12 +126,17 @@ body {
 
 .btn-light {
   align-content: center;
-  color: #151515;
   background-color: #ffffff;
   border: 1px solid #ffffff;
   text-align: center;
   display: block;
   margin: 0 auto 0 auto;
+}
+
+.btn-light:hover {
+  background: #207ec4;
+  border: 1px solid #207ec4;
+  color: #ffffff;
 }
 
 .btn-secondary:hover {
